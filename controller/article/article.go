@@ -18,3 +18,20 @@ func List(g *gin.Context)  {
 	}
 	ext.Success(res, "ok")
 }
+
+func Info(g *gin.Context)  {
+	ext := lib.BuildGinExt(g)
+	idStr := g.DefaultQuery("id", "")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		ext.Fault("params error")
+		return
+	}
+	var res models.Article
+	isOk, err := lib.GetMysql().Id(id).Where("is_del=0").Get(&res)
+	if err != nil || !isOk {
+		ext.Fault404("404")
+		return
+	}
+	ext.Success(res, "ok")
+}

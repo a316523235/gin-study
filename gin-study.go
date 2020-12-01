@@ -3,6 +3,8 @@ package main
 import (
 	"gin-study/controller"
 	"gin-study/controller/article"
+	"gin-study/controller/manager"
+	"gin-study/middleware"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -23,4 +25,12 @@ func bind(r *gin.Engine)  {
 	r.GET("/jsonp", controller.Jsonp)
 
 	r.GET("/article/list", article.List)
+	r.GET("/article/info", article.Info)
+
+	r.POST("/manager/login", manager.Login)
+	group := r.Group("/manager")
+	group.Use(middleware.AdminAuth())
+	group.GET("/auth/check", manager.AuthCheck)
+	group.POST("/article/add", manager.ArticleAdd)
+	group.PUT("/article/edit", manager.ArticleEdit)
 }
