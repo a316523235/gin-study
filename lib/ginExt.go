@@ -29,7 +29,7 @@ func (x *ginExt) Fault(message string) {
 }
 
 func (x *ginExt) GetPageInfo() (page, pageSize int) {
-	pageStr, pageSizeStr := x.g.DefaultQuery("page", "1"),x.g.DefaultQuery("page", "20")
+	pageStr, pageSizeStr := x.g.DefaultQuery("page", "1"),x.g.DefaultQuery("pagesize", "20")
 	page, _ = strconv.Atoi(pageStr)
 	pageSize, _ = strconv.Atoi(pageSizeStr)
 	if page < 1 {
@@ -39,4 +39,10 @@ func (x *ginExt) GetPageInfo() (page, pageSize int) {
 		pageSize = 20
 	}
 	return page, pageSize
+}
+
+func (x *ginExt) GetLimitInfo() (limit, start int)  {
+	page, pagesize := x.GetPageInfo()
+	limit, start = page * pagesize, (page - 1) * pagesize
+	return
 }

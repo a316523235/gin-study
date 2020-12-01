@@ -2,7 +2,9 @@ package main
 
 import (
 	"gin-study/controller"
+	"gin-study/controller/article"
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main()  {
@@ -19,4 +21,6 @@ func bind(r *gin.Engine)  {
 	r.GET("/redirect", controller.Redirect)
 	r.GET("/redirect2", controller.Redirect2)
 	r.GET("/jsonp", controller.Jsonp)
+
+	r.GET("/article/list", article.List)
 }
