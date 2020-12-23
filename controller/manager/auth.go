@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Login(g *gin.Context)  {
+func Login(g *gin.Context) {
 	ext := lib.BuildGinExt(g)
 	username, password := g.PostForm("username"), g.PostForm("pwd")
 	if username == "" || password == "" {
@@ -30,11 +30,11 @@ func Login(g *gin.Context)  {
 	key := fmt.Sprintf(conf.AdminTokenKey, token)
 	_, _ = lib.GetRedis().Do("set", key, adminInfo)
 	_, _ = lib.GetRedis().Do("expire", key, 60*60*24)
-	g.SetCookie("admin_token", token, 60 * 60 * 24, "", "", false, true)
+	g.SetCookie("admin_token", token, 60*60*24, "", "", false, true)
 	ext.Success(admin, "ok")
 }
 
-func AuthCheck(g *gin.Context)  {
+func AuthCheck(g *gin.Context) {
 	ext := lib.BuildGinExt(g)
 	admin := ext.GetAdminInfo()
 	ext.Success(admin, "ok")

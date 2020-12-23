@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ArticleAdd(g *gin.Context)  {
+func ArticleAdd(g *gin.Context) {
 	ext := lib.BuildGinExt(g)
 	var article models.Article
 	err := g.ShouldBind(&article)
@@ -22,7 +22,7 @@ func ArticleAdd(g *gin.Context)  {
 	ext.Success(article, "ok")
 }
 
-func ArticleEdit(g *gin.Context)  {
+func ArticleEdit(g *gin.Context) {
 	ext := lib.BuildGinExt(g)
 	var article models.Article
 	err := g.ShouldBind(&article)

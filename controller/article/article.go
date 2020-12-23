@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func List(g *gin.Context)  {
+func List(g *gin.Context) {
 	ext := lib.BuildGinExt(g)
 	limit, start := ext.GetLimitInfo()
 	var res []models.Article
@@ -19,7 +19,7 @@ func List(g *gin.Context)  {
 	ext.Success(res, "ok")
 }
 
-func Info(g *gin.Context)  {
+func Info(g *gin.Context) {
 	ext := lib.BuildGinExt(g)
 	idStr := g.DefaultQuery("id", "")
 	id, err := strconv.Atoi(idStr)

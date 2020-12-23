@@ -9,13 +9,13 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func main()  {
+func main() {
 	r := gin.Default()
 	bind(r)
 	_ = r.Run() // listen and serve on 0.0.0.0:8080
 }
 
-func bind(r *gin.Engine)  {
+func bind(r *gin.Engine) {
 
 	r.LoadHTMLGlob("views/*")
 	r.GET("/", controller.Index)
