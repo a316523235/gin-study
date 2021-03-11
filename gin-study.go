@@ -4,6 +4,7 @@ import (
 	"gin-study/controller"
 	"gin-study/controller/article"
 	"gin-study/controller/manager"
+	"gin-study/controller/validate"
 	"gin-study/middleware"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
@@ -26,6 +27,8 @@ func bind(r *gin.Engine) {
 
 	r.GET("/article/list", article.List)
 	r.GET("/article/info", article.Info)
+
+	r.GET("/validate/v1", validate.V1)
 
 	r.POST("/manager/login", manager.Login)
 	group := r.Group("/manager")
